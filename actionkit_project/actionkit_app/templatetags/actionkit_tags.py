@@ -118,7 +118,7 @@ def load_css(parser, token):
     parsed = ''.join(["""
     <link rel="stylesheet" href="%s" />
     """ % _add_domain(s)
-        for s in re.findall(r'/[^\s]+css', source)])
+        for s in re.findall(r'/[^\s]+css.*', source)])
     return StaticContentNode(parsed)
 
 @register.tag
@@ -151,6 +151,10 @@ def nth(value, arg):
 @register.filter
 def mod(value, arg):
     return int(value or 0) % int(arg)
+
+@register.filter
+def subtract(value, arg):
+    return float(value) - float(arg)
 
 @register.filter
 def add(value, arg):
@@ -233,7 +237,7 @@ def collapse_spaces(value):
 
 @register.filter
 def matches(value, regex):
-    return bool(re.search(regex, value))
+    return re.match(regex, value)
 
 @register.filter
 def strip_nondigits(value):

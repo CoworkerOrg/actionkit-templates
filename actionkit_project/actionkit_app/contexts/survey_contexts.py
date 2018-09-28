@@ -2,15 +2,18 @@ survey = {
     'filename': 'survey.html',
     'page': {
         "title": "Survey page (stub)",
-        "canonical_url": "http://example.com/survey/foobar"
+        "canonical_url": "http://example.com/survey/foobar",
+        "custom_fields": {
+            "featured_image": "foobar"
+        }
     },
     'form': {
         'introduction_text': 'Take our Survey!',
         'surveyquestion_set': {
             'all': [
                 {'question_label': "How do you feel?",
-                 'question_html': '<input type="text" name="action_howfeel" />',
-             },
+                 'input_html': '<input type="text" name="action_howfeel" />'
+                },
             ],
         },
     },
@@ -51,9 +54,5 @@ logged_in_data.update(survey)
 contexts = {
     'survey.html': survey,
     'survey_logged_in': logged_in_data,
-
-     #kinda silly, but avoid appending to the bottom because then git merge conflicts arise more often.
-    #let's do the context values in alphabetical order.
 }
-
 
